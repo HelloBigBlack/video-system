@@ -29,6 +29,11 @@
 		where
 			message_id = #{message_id,jdbcType=INTEGER}
 	</delete>
+	<delete id="deleteMessageBoxByUserId" parameterType="string">
+		delete from message_box
+		where
+			user_id = #{userId}
+	</delete>
 	<insert id="insertMessageBox" parameterType="com.chao.video.bean.MessageBox">
 		insert into message_box (video_id, user_id, message_text)
 		values(#{videoId}, #{userId}, #{messageText})

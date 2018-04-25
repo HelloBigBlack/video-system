@@ -1,5 +1,7 @@
 package com.chao.video.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.chao.video.bean.User;
@@ -10,4 +12,5 @@ public interface UserMapper {
 	void insertUser(User user);
 	User selectByEmail(String email);
 	void deleteUserByEmail(String email);
+	List<User> selectAllUser();
 }

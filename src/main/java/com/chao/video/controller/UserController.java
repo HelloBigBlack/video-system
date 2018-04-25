@@ -20,6 +20,12 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
+	@RequestMapping("/getAll")
+	@ResponseBody
+	public Msg getAllUser(){
+		return Msg.success().add("users", service.getAllUser());
+	}
+	
 	@RequestMapping("/delete")
 	@ResponseBody
 	public Msg delete(@RequestParam String email){

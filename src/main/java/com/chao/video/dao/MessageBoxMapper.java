@@ -9,5 +9,7 @@ public interface MessageBoxMapper {
 	
 	void deleteMessageBoxByMessageId(Integer messageId);
 	
+	void deleteMessageBoxByUserId(String userId);
+	
 	void insertMessageBox(MessageBox messageBox);
 }

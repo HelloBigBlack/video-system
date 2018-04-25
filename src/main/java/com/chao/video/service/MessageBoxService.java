@@ -26,4 +26,8 @@ public class MessageBoxService {
 		mapper.insertMessageBox(messageBox);
 	}
 	
+	public void deleteMessageBoxByUserId(String userId){
+		mapper.deleteMessageBoxByUserId(userId);
+	}
+	
 }
