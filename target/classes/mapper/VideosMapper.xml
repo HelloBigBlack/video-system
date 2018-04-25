@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chao.video.dao.VideosMapper">
+  <resultMap id="BaseResultMap" type="com.chao.video.bean.Video">
+    <id column="video_id" jdbcType="INTEGER" property="videoId" />
+    <result column="video_title" jdbcType="VARCHAR" property="videoTitle" />
+    <result column="video_brief" jdbcType="VARCHAR" property="videoBrief" />
+    <result column="video_class" jdbcType="VARCHAR" property="videoClass" />
+    <result column="video_label" jdbcType="VARCHAR" property="videoLabel" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
+    <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+    <result column="video_time" jdbcType="INTEGER" property="videoTime" />
+  </resultMap>
+  <resultMap id="ResultMapWithMessageBoxCount" type="com.chao.video.bean.Video">
+    <id column="video_id" jdbcType="INTEGER" property="videoId" />
+    <result column="video_title" jdbcType="VARCHAR" property="videoTitle" />
+    <result column="video_brief" jdbcType="VARCHAR" property="videoBrief" />
+    <result column="video_class" jdbcType="VARCHAR" property="videoClass" />
+    <result column="video_label" jdbcType="VARCHAR" property="videoLabel" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
+    <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+    <result column="video_time" jdbcType="INTEGER" property="videoTime" />
+    <result column="video_visited" jdbcType="INTEGER" property="videoVisited" />
+    <result column="message_count" jdbcType="INTEGER" property="messageCount" />
+  </resultMap>
+  
+  <resultMap type="com.chao.video.bean.VideoClass" id="VideoClassResultMap">
+  	<id column="id" jdbcType="INTEGER" property="id"/>
+  	<result column="name" jdbcType="VARCHAR" property="name"/>
+  </resultMap>
+  
+  <select id="getVideoClasses" resultMap="VideoClassResultMap">
+  	select * from video_class
+  </select>
+  
+  <sql id="Base_Column_List">
+    video_id, video_title, video_brief, video_class, video_label, img_url, video_url, 
+    date_format(upload_time,'%Y-%m-%d') as upload_time, video_time, video_visited
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from videos
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from videos
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chao.video.bean.Video">
+    insert into videos (video_id, video_title, video_brief, 
+      video_class, video_label, img_url, 
+      video_url, upload_time, video_time
+      )
+    values (#{videoId,jdbcType=INTEGER}, #{videoTitle,jdbcType=VARCHAR}, #{videoBrief,jdbcType=VARCHAR}, 
+      #{videoClass,jdbcType=VARCHAR}, #{videoLabel,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, 
+      #{videoUrl,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, #{videoTime,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chao.video.bean.Video">
+    insert into videos
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        video_id,
+      </if>
+      <if test="videoTitle != null and videoTitle != ''">
+        video_title,
+      </if>
+      <if test="videoBrief != null and videoBrief != ''">
+        video_brief,
+      </if>
+      <if test="videoClass != null and videoClass != ''">
+        video_class,
+      </if>
+      <if test="videoLabel != null and videoLabel != ''">
+        video_label,
+      </if>
+      <if test="imgUrl != null and imgUrl != ''">
+        img_url,
+      </if>
+      <if test="videoUrl != null videoUrl != ''">
+        video_url,
+      </if>
+      <if test="uploadTime != null uploadTime != ''">
+        upload_time,
+      </if>
+      <if test="videoTime != null videoTime != ''">
+        video_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="videoTitle != null and videoTitle != ''">
+        #{videoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="videoBrief != null and videoBrief != ''">
+        #{videoBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="videoClass != null and videoClass != ''">
+        #{videoClass,jdbcType=VARCHAR},
+      </if>
+      <if test="videoLabel != null and videoLabel != ''">
+        #{videoLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null and imgUrl != ''">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null and videoUrl != ''">
+        #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null and uploadTime != ''">
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="videoTime != null and videoTime != ''">
+        #{videoTime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chao.video.bean.Video">
+    update videos
+    <set>
+      <if test="videoTitle != null and videoTitle != ''">
+        video_title = #{videoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="videoBrief != null and videoBrief != ''">
+        video_brief = #{videoBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="videoClass != null and videoClass != ''">
+        video_class = #{videoClass,jdbcType=VARCHAR},
+      </if>
+      <if test="videoLabel != null and videoLabel != ''">
+        video_label = #{videoLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null and imgUrl != ''">
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null and videoUrl != ''">
+        video_url = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null and uploadTime != ''">
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="videoTime != null and videoTime != ''">
+        video_time = #{videoTime,jdbcType=INTEGER},
+      </if>
+      <if test="videoVisited != null and videoVisited != ''">
+      	video_visited = #{videoVisited,jdbcType=INTEGER},
+      </if>
+    </set>
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chao.video.bean.Video">
+    update videos
+    set video_title = #{videoTitle,jdbcType=VARCHAR},
+      video_brief = #{videoBrief,jdbcType=VARCHAR},
+      video_class = #{videoClass,jdbcType=VARCHAR},
+      video_label = #{videoLabel,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      video_url = #{videoUrl,jdbcType=VARCHAR},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      video_time = #{videoTime,jdbcType=INTEGER}
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </update>
+  
+    
+  <select id="getAllVideos" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from videos
+  </select>
+  <select id="getVideosByVideoMessage" resultMap="ResultMapWithMessageBoxCount" parameterType="com.chao.video.bean.VideoMessage">
+  	select
+  		v.video_id as video_id, 
+  		v.video_title as video_title, 
+  		v.video_brief as video_brief, 
+  		v.video_class as video_class,
+  		v.video_label as video_label, 
+  		v.img_url as img_url, 
+  		v.video_url as video_url, 
+    	date_format(v.upload_time,'%Y-%m-%d') as upload_time,
+    	v.video_time as video_time,
+    	v.video_visited as video_visited,
+    	count(m.message_id) as message_count
+  	from videos v
+  	left join message_box m on v.video_id = m.video_id
+  	where 1=1
+    	<if test="msg != null and msg != ''">
+  		and (v.video_label like CONCAT('%',#{msg},'%') 
+  			or v.video_class like CONCAT('%',#{msg},'%') 
+  			or v.video_title like CONCAT('%',#{msg},'%') 
+  			or v.video_brief like CONCAT('%',#{msg},'%')) 
+  	</if>
+  	<if test="videoClass != null and videoClass != ''">
+  		and v.video_class = #{videoClass} 
+  	</if>
+  	<if test="minTime != null &amp;&amp; maxTime != null">
+  		and v.video_time between #{minTime} and #{maxTime}
+  	</if>
+  	group by v.video_id
+    <if test="order != null and order != ''">
+  		order by ${order}
+  		<if test="orderType != null and orderType != ''">
+  		${orderType}
+  		</if>
+  	</if>
+  </select>
+  
+</mapper>

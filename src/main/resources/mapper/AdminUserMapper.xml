@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chao.video.dao.AdminUserMapper">
+  <resultMap id="BaseResultMap" type="com.chao.video.bean.AdminUser">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  
+  <select id="selectUserCount" resultType="int" parameterType="com.chao.video.bean.AdminUser">
+  	select count(*) from admin_user where id = #{id} and password = #{password}
+  </select>
+  
+
+</mapper>

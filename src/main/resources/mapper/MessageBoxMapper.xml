@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chao.video.dao.MessageBoxMapper">
+	<resultMap type="com.chao.video.bean.MessageBox" id="BaseResultMap">
+		<id column="message_id" jdbcType="INTEGER" property="messageId"/>
+		<result column="video_id" jdbcType="INTEGER" property="videoId"/>
+		<result column="user_id" jdbcType="VARCHAR" property="userId"/>
+		<result column="message_text" jdbcType="VARCHAR" property="messageText"/>
+		<result column="timestep" jdbcType="VARCHAR" property="timestep"/>
+		<result column="name" jdbcType="VARCHAR" property="userName"/>
+	</resultMap>
+	
+	<select id="getMessageBoxByVideoId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select 
+			message_id,
+			video_id,
+			user_id,
+			message_text,
+			date_format(timestep,'%Y-%m-%d %H:%i:%s') as timestep,
+			name
+		from message_box
+		left join user on message_box.user_id = user.email
+		where video_id = #{videoId,jdbcType=INTEGER}
+		order by timestep desc
+	</select>
+	
+	<delete id="deleteMessageBoxByMessageId" parameterType="java.lang.Integer">
+		delete from message_box
+		where
+			message_id = #{message_id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insertMessageBox" parameterType="com.chao.video.bean.MessageBox">
+		insert into message_box (video_id, user_id, message_text)
+		values(#{videoId}, #{userId}, #{messageText})
+	</insert>
+</mapper>
+  
