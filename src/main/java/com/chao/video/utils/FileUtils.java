@@ -33,7 +33,6 @@ public class FileUtils {
 		String videoFileName = UUID.randomUUID().toString().substring(0, 10)
 				+ format.format(currentTime) + "."
 				+ name[name.length-1];
-		
 		return videoFileName;
 	}
 	
