@@ -26,4 +26,8 @@
 		insert into user (email, name, sex, password, register, no_message)
 		values (#{email}, #{name}, #{sex}, #{password}, #{register}, #{noMessage})
 	</insert>
+	
+	<delete id="deleteUserByUserId" parameterType="int">
+		delete from user where email = #{email}
+	</delete>
 </mapper>

@@ -9,4 +9,5 @@ public interface UserMapper {
 	Integer selectUserCountByEmailAndPassword(@Param("emailId")String emailId, @Param("password")String password);
 	void insertUser(User user);
 	User selectByEmail(String email);
+	void deleteUserByEmail(String email);
 }

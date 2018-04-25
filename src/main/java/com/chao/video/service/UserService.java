@@ -26,4 +26,8 @@ public class UserService {
 	public User getUserInfoByEmail(String email){
 		return mapper.selectByEmail(email);
 	}
+	
+	public void deleteUserByEmail(String email){
+		mapper.deleteUserByEmail(email);
+	}
 }
