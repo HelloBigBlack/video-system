@@ -36,6 +36,15 @@ public class VideoController {
 	@Autowired
 	private VideoService service;
 	
+	@RequestMapping("/getVideos")
+	@ResponseBody
+	public Msg getVideos(@RequestBody VideoMessage videoMessage, @RequestParam Integer num){
+		PageHelper.startPage(1, num);
+		List<Video> videos = service.getVideosByVideoMessage(videoMessage);
+		PageInfo<Video> pageInfo = new PageInfo<>(videos, 5);
+		return Msg.success().add("pageInfo", pageInfo);
+	}
+	
 	@RequestMapping("/getVideoById")
 	@ResponseBody
 	public Msg getVideoById(@RequestParam Integer id){
