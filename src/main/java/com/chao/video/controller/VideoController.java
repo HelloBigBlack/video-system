@@ -74,10 +74,11 @@ public class VideoController {
 
 	@RequestMapping(value = "/getByMessage", method=RequestMethod.POST)
 	@ResponseBody
-	public Msg getVideosByVideoMessage(@RequestParam(value = "pn", defaultValue = "1") Integer pn,@RequestBody VideoMessage message) {
+	public Msg getVideosByVideoMessage(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
+			@RequestParam(value="num", defaultValue="10") Integer num,@RequestBody VideoMessage message) {
 		System.out.println(message);
 		System.out.println(pn);
-		PageHelper.startPage(pn, 10);
+		PageHelper.startPage(pn, num);
 		List<Video> videos = service.getVideosByVideoMessage(message);
 		PageInfo<Video> pageInfo = new PageInfo<>(videos, 5);
 		return Msg.success().add("pageInfo", pageInfo);
