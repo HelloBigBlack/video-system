@@ -13,6 +13,7 @@ public class VideoMessage {
 	private String order;
 	//使用哪个字段进行排序
 	private String orderType;
+	
 	public String getMsg() {
 		return msg;
 	}

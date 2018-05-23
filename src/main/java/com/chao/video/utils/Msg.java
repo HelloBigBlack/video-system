@@ -5,9 +5,11 @@ import java.util.Map;
 
 public class Msg {
 	
-	//530失败  520成功
+	//code 用来表示状态，530表示失败  520表示成功
 	private Integer code;
+	// msg用来表示要传递的信息
 	private String msg;
+	// 使用map对象来保存要传递的对象
 	private Map<String, Object> extend = new HashMap<String, Object>();
 	
 	public Msg add(String key, Object value){

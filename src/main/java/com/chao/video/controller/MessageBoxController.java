@@ -19,6 +19,8 @@ public class MessageBoxController {
 	@Autowired
 	private MessageBoxService service;
 	
+	
+	//添加留言
 	@RequestMapping("/addMessageBox")
 	@ResponseBody
 	public Msg addMessageBox(@RequestBody MessageBox messageBox){
@@ -26,13 +28,13 @@ public class MessageBoxController {
 		return Msg.success();
 	}
 	
-	
+	//根据视频id来获取留言
 	@RequestMapping("/getMessageBoxByVideoId")
 	@ResponseBody
 	public Msg getMessageBoxByVideoId(@RequestParam Integer videoId){
 		return Msg.success().add("messageBox", service.getMessageBoxByVideoId(videoId));
 	}
-	
+	//根据视频id删除留言
 	@RequestMapping("/deleteByMessageId")
 	@ResponseBody
 	public Msg deleteMessageBoxByMessageId(@RequestParam Integer messageId){

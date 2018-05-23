@@ -2,26 +2,27 @@ package com.chao.video.bean;
 
 
 public class Video {
+	// 视频的id
     private Integer videoId;
-
+    // 视频的标题
     private String videoTitle;
-
+    // 视频的简介
     private String videoBrief;
-
+    // 视频的类别
     private String videoClass;
-
+    // 视频的标签
     private String videoLabel;
-
+    // 视频的封面url
     private String imgUrl;
-
+    // 视频文件的url
     private String videoUrl;
-
+    // 视频的上传时间
     private String uploadTime;
-
+    // 视频的时长
     private Integer videoTime;
-    
+    // 视频的访问量 
     private Integer videoVisited;
-    
+    // 视频的留言数量
     private Integer messageCount;
 
    

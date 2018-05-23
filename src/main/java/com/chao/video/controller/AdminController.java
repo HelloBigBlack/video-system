@@ -21,6 +21,7 @@ public class AdminController {
 	AdminUserService userService;
 	
 
+	//π‹¿Ì‘±µ«¬º
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg login(AdminUser user){

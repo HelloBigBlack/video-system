@@ -20,12 +20,14 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
+	//获取全部用户
 	@RequestMapping("/getAll")
 	@ResponseBody
 	public Msg getAllUser(){
 		return Msg.success().add("users", service.getAllUser());
 	}
 	
+	//根据用户的id来删除用户
 	@RequestMapping("/delete")
 	@ResponseBody
 	public Msg delete(@RequestParam String email){
@@ -33,6 +35,7 @@ public class UserController {
 		return Msg.success();
 	}
 	
+	//注册用户
 	@RequestMapping("/register")
 	@ResponseBody
 	public Msg register(@RequestBody User user){
@@ -43,6 +46,7 @@ public class UserController {
 		return Msg.success();
 	}
 	
+	//用户登录
 	@RequestMapping("/login")
 	@ResponseBody
 	public Msg login(@RequestBody User user){

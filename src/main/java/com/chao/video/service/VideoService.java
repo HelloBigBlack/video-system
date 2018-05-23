@@ -35,10 +35,10 @@ public class VideoService {
 	}
 	
 	public void deleteVideobyPrimaryKey(Integer id){
-		Video video = mapper.selectByPrimaryKey(id);
-		FileUtils.deleteFile("d:\\123\\video\\" + video.getVideoUrl());
-		FileUtils.deleteFile("d:\\123\\images\\" + video.getImgUrl());
-		mapper.deleteByPrimaryKey(id);
+		Video video = mapper.selectByPrimaryKey(id);//根据id从数据库中获取视频的信息
+		FileUtils.deleteFile("d:\\123\\video\\" + video.getVideoUrl());//删除视频文件
+		FileUtils.deleteFile("d:\\123\\images\\" + video.getImgUrl());//删除图片文件
+		mapper.deleteByPrimaryKey(id);//删除数据库中该视频的记录
 	}
 	
 	public List<VideoClass> getVideoClasses(){
